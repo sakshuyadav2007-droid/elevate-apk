@@ -17,6 +17,14 @@ jobs:
 
       - run: npm install
       - run: npm run copy:web
+             - run: npm install
+      
+      # Ye step add karo (Make sure tumhare package.json mein build script ho)
+      - name: Build Web App
+        run: npm run build 
+
+      - run: npx cap add android
+
       - run: |
           if [ ! -d android ]; then npx cap add android; fi
       - run: npx cap sync android
