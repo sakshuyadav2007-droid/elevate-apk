@@ -1,0 +1,6 @@
+{
+  "appId": "com.elevate.app",
+  "appName": "Elevate App",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

@@ -1,0 +1,20 @@
+{
+  "name": "elevate-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Elevate motivation web app wrapped for Android APK using Capacitor",
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "scripts": {
+    "copy:web": "node copy-web-assets.js",
+    "cap:sync": "npm run copy:web && npx cap sync android",
+    "cap:add:android": "npx cap add android",
+    "cap:open": "npx cap open android",
+    "android:setup": "npm run copy:web && npm run cap:add:android && npm run cap:sync",
+    "apk:debug": "cd android && gradlew.bat assembleDebug",
+    "apk:release": "cd android && gradlew.bat assembleRelease"
+  }
+}
