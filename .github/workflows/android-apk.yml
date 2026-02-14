@@ -7,29 +7,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # UPDATE: Node version ko 20 kar diya hai (Error fix karne ke liye)
       - uses: actions/setup-node@v4
         with:
-          node-version: 17
+          node-version: '20'
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
 
       - run: npm install
-      - run: npm run copy:web
-             - run: npm install
-      
-      # Ye step add karo (Make sure tumhare package.json mein build script ho)
+
+      # IMPORTANT: Web app build karna zaroori hai taaki 'dist'/'www' folder bane
       - name: Build Web App
-        run: npm run build 
+        run: npm run build
 
-      - run: npx cap add android
-
+      # Android platform add karna (agar folder nahi hai tabhi)
       - run: |
-          if [ ! -d android ]; then npx cap add android; fi
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+
+      # Capacitor sync karna
       - run: npx cap sync android
+
+      # Gradle se APK build karna
       - run: cd android && ./gradlew assembleDebug
 
+      # APK upload karna
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
