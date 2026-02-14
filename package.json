@@ -9,6 +9,7 @@
     "@capacitor/core": "^7.4.3"
   },
   "scripts": {
+    "build": "npm run copy:web",
     "copy:web": "node copy-web-assets.js",
     "cap:sync": "npm run copy:web && npx cap sync android",
     "cap:add:android": "npx cap add android",
